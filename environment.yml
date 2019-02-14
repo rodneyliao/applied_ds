@@ -1,0 +1,11 @@
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - matplotlib
+  - pandas
+  - seaborn
+  - rise
+  - statsmodels
+  - pip:
+    - jupyter-contrib-nbextensions
