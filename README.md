@@ -1,2 +1,4 @@
-# applied_ds
-Course Material for EM212: Applied Data Science, Tufts University
+# EM212: Applied Data Science
+---
+
+Course Material for Applied Data Science, Tufts University
