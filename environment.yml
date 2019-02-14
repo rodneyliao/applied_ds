@@ -7,5 +7,7 @@ dependencies:
   - seaborn
   - rise
   - statsmodels
+  - scikit-learn
+  - jupyter_nbextensions_configurator
   - pip:
     - jupyter-contrib-nbextensions
