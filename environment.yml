@@ -1,6 +1,8 @@
+name: em212
 channels:
   - conda-forge
 dependencies:
+  - python=3.7
   - numpy
   - matplotlib
   - pandas
@@ -8,6 +10,8 @@ dependencies:
   - rise
   - statsmodels
   - scikit-learn
+  - jupyterlab
+  - jupyter
   - jupyter_nbextensions_configurator
   - pip:
     - jupyter-contrib-nbextensions
