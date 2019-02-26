@@ -11,3 +11,4 @@ install:
   - conda info -a
   - conda env create -q enviornment.yml
   - source activate em212
+script: pytest
