@@ -8,7 +8,7 @@ dependencies:
   - pandas
   - seaborn
   - rise
-  - pytest
+  - pytest=4.0.0
   - statsmodels
   - scikit-learn
   - jupyterlab
