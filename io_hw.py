@@ -1,5 +1,6 @@
 import pandas as pd
 import seaborn as sns
+import pdb 
 
 def io_hw(out_path):
     '''
@@ -15,4 +16,8 @@ def io_hw(out_path):
     df: The full pandas dataframe of your dataset.
     head_df: A new dataframe that is a copy of the first 5 lines of your dataframe, df.
     '''
+    pdb.set_trace()
+    df = pd.read_csv('⁨~/Users⁩/henrypeyronnin⁩/⁨Desktop⁩/Term 4⁩/⁨Data Science/fedwire_2017.csv')
+    head_df = df.head()
+    head_df.to_csv(out_path)
     return df, head_df
