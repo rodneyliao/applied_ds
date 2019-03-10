@@ -19,8 +19,8 @@ def io_hw(out_path):
     pdb.set_trace()
     df = pd.read_csv('https://community.watsonanalytics.com/wp-content/uploads/2015/03/WA_Fn-UseC_-Operations-Dem-Planning_-BikeShare.csv')
     '''
-    df = pd.read_excel('/Users/zhangdanhui/GoogleDrive/MSIM2018-2019/SP2019/EM212_Applied_Data_Science/Homework/Project_New_Seahorse/CellLineResults.xls')
+    df = pd.read_csv('/Users/zhangdanhui/GoogleDrive/MSIM2018-2019/SP2019/EM212_Applied_Data_Science/Homework/Project_New_Seahorse/CellLineInput.csv')
+    
     head_df = df.head(5)
     head_df.to_csv(out_path)
     return df, head_df
-
