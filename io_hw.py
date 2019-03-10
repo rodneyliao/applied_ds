@@ -1,6 +1,4 @@
 import pandas as pd
-import seaborn as sns
-import os
 
 def io_hw(out_path):
     '''
