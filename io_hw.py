@@ -18,7 +18,6 @@ def io_hw(out_path):
     df = pd.read_excel('http://www.harpswell.maine.gov/vertical/Sites/%7B3F690C92-5208-4D62-BAFB-2559293F6CAE%7D/uploads/2018_COMMITMENT.xlsx')
     
     
-    
     head_df = df.head()
     head_df.to_csv('./test.csv')
 
