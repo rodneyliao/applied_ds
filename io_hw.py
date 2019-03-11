@@ -2,6 +2,10 @@ import pandas as pd
 import seaborn as sns
 
 def io_hw(out_path):
+
+    df = pd.DataFrame.from_csv(out_path)
+    head_df = df.head()
+
     '''
     This is your homework assignment.
     You will be wrting a function here.
