@@ -15,8 +15,11 @@ def io_hw(out_path):
     df: The full pandas dataframe of your dataset.
     head_df: A new dataframe that is a copy of the first 5 lines of your dataframe, df.
     '''
-    df = pd.read_csv('/Users/Shea/Desktop/Book1.csv')
-    head_df = df.head(df)
-    head_df.to_csv('/Users/Shea/Desktop/TestCopy.csv')
+    df = pd.read_excel('http://www.harpswell.maine.gov/vertical/Sites/%7B3F690C92-5208-4D62-BAFB-2559293F6CAE%7D/uploads/2018_COMMITMENT.xlsx')
     
+    
+    
+    head_df = df.head()
+    head_df.to_csv('./test.csv')
+
     return df, head_df
