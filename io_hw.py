@@ -1,4 +1,5 @@
 import pandas as pd
+import seaborn as sns
 
 def io_hw(out_path):
     '''
@@ -14,9 +15,4 @@ def io_hw(out_path):
     df: The full pandas dataframe of your dataset.
     head_df: A new dataframe that is a copy of the first 5 lines of your dataframe, df.
     '''
-    filePath = 'https://tufts.app.box.com/file/411860624841'
-    df = pd.read_csv(filePath, sep = ',', error_bad_lines=False)
-    head_df = df.head()
-    output = head_df.to_csv(out_path, sep = ',')
-    print(type(head_df))
     return df, head_df
