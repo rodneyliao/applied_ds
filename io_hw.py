@@ -2,7 +2,6 @@ import pandas as pd
 import seaborn as sns
 import csv
 
-
 def io_hw(out_path):
     '''
     This is your homework assignment.
