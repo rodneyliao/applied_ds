@@ -1,5 +1,7 @@
 import pandas as pd
 import seaborn as sns
+import csv
+
 
 def io_hw(out_path):
     '''
@@ -15,4 +17,14 @@ def io_hw(out_path):
     df: The full pandas dataframe of your dataset.
     head_df: A new dataframe that is a copy of the first 5 lines of your dataframe, df.
     '''
+    
+    
+    df= pd.read_csv('https://community.watsonanalytics.com/wp-content/uploads/2015/03/WA_Fn-UseC_-Telco-Customer-Churn.csv')
+    print(df.head(5))
+   
+    head_df= df.head(5)
+    
+    head_df.to_csv(out_path)
+    
     return df, head_df
+
