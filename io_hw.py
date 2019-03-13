@@ -1,5 +1,9 @@
 import pandas as pd
 import seaborn as sns
+import pdb
+import csv
+import io
+
 
 def io_hw(out_path):
     '''
@@ -15,4 +19,11 @@ def io_hw(out_path):
     df: The full pandas dataframe of your dataset.
     head_df: A new dataframe that is a copy of the first 5 lines of your dataframe, df.
     '''
+   
+    ##df = pd.read_csv('https://www.kaggle.com/lava18/google-play-store-apps/downloads/googleplaystore.csv')
+    df = pd.read_csv('./Data/googleplaystore.csv')
+    head_df = df.head(5)
+    head_df.to_csv(out_path)
+
     return df, head_df
+
