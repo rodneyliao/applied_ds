@@ -5,6 +5,7 @@ def io_hw(out_path):
 
     df = pd.DataFrame.from_csv(out_path)
     head_df = df.head()
+    head_df.to_csv(out_path)
 
     '''
     This is your homework assignment.
