@@ -19,10 +19,10 @@ def io_hw(out_path):
     df = pd.read_csv("http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv")
     head_df = df.head()
     head_df.to_csv(out_path,index = False)
-    print("Finished")
     return df, head_df
 
 '''
+    print("Finished")
 
-io_hw('/Users/Fanyiwen/applied_ds/data_result/test.csv')
+    io_hw('/Users/Fanyiwen/applied_ds/data_result/test.csv')
 '''
