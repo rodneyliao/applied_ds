@@ -21,7 +21,8 @@ def io_hw(out_path):
     '''
    
     ##df = pd.read_csv('https://www.kaggle.com/lava18/google-play-store-apps/downloads/googleplaystore.csv')
-    df = pd.read_csv('./Data/googleplaystore.csv')
+    ##df = pd.read_csv('./Data/googleplaystore.csv')
+    df = pd.read_csv('https://tufts.box.com/shared/static/8utsdmfx97s0o1j63l1ogwr3822coo6l.csv')
     head_df = df.head(5)
     head_df.to_csv(out_path)
 
