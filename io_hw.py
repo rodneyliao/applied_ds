@@ -16,7 +16,7 @@ def io_hw(out_path):
     df: The full pandas dataframe of your dataset.
     head_df: A new dataframe that is a copy of the first 5 lines of your dataframe, df.
     '''
-    df = pd.read_csv('./LTVaccine2018.csv')
+    df = pd.read_csv('https://s3.amazonaws.com/csvpastebin/uploads/9af9d21af04e688a43a8d48f9a5c2e0d/2018VAERSVAX.csv')
     head_df = df.head(5)
     head_df.to_csv(out_path)
     return df, head_df
