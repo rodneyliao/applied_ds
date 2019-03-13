@@ -2,6 +2,7 @@ import pytest
 import pandas as pd
 import numpy as np
 import os
+import pdb
 import io_hw
 
 num = np.random.randint(100000000)
@@ -16,5 +17,5 @@ def test_io_hw():
     """
     df, head_df = io_hw.io_hw('%s_%d.csv' % (name, num))
     assert os.path.isfile('%s_%d.csv' % (name, num))
-    assert sum(1 for line in open('%s_%d.csv' % (name, num)) - 1 == len(head_df)
+    assert sum(1 for line in open('%s_%d.csv' % (name, num))) - 1 == len(head_df)
     assert len(df.columns) == len(head_df.columns)
