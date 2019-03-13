@@ -19,6 +19,6 @@ def io_hw(out_path):
     
     head_df = df.head()
     
-    head_df.to_csv('./test.csv')
+    head_df.to_csv(out_path)
 
     return df, head_df
