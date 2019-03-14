@@ -1,6 +1,6 @@
-County,FIPS Code,Formatted FIPS,Estimated percent of adults reporting to be obese (a body mass i,Estimated percent of adults reporting to engage in binge drinkin,Estimated percent of adults reporting to be physically inactive ,"Rate of limited-service restaurants per 100,000 people in 2016.",State
-Osage,40113,40113,33.03,10.65,38.99,41.62,Oklahoma
-Texas,40139,40139,32.29,12.22,38.48,37.06,Oklahoma
-Cimarron,40025,40025,31.3,11.44,38.33,,Oklahoma
-Beaver,40007,40007,31.56,12.12,35.92,,Oklahoma
-McCurtain,40089,40089,32.68,11.42,39.09,42.24,Oklahoma
+,County,FIPS Code,Formatted FIPS,Estimated percent of adults reporting to be obese (a body mass i,Estimated percent of adults reporting to engage in binge drinkin,Estimated percent of adults reporting to be physically inactive ,"Rate of limited-service restaurants per 100,000 people in 2016.",State
+0,Osage,40113,40113,33.03,10.65,38.99,41.62,Oklahoma
+1,Texas,40139,40139,32.29,12.22,38.48,37.06,Oklahoma
+2,Cimarron,40025,40025,31.3,11.44,38.33,,Oklahoma
+3,Beaver,40007,40007,31.56,12.12,35.92,,Oklahoma
+4,McCurtain,40089,40089,32.68,11.42,39.09,42.24,Oklahoma
