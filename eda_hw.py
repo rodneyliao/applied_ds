@@ -4,6 +4,8 @@ import math
 import pdb
 
 def average(series):
+
+    return sum(series) / len(series)
     """
     implements the average of a pandas series from scratch
     suggested functions:
@@ -17,6 +19,15 @@ def average(series):
     pass
 
 def standard_deviation(series):
+
+    avg = average(series)
+    ser_len = float(len(series))
+    stdsum = 0
+    for i in range(0, len(series)):
+        stdsum += (series[i] - avg)**2
+
+
+    return math.sqrt(stdsum / (ser_len - 1.0))
     """
     implements the sample standard deviation of a series from scratch
     you may need a for loop and your average function
@@ -29,6 +40,15 @@ def standard_deviation(series):
     pass
 
 def median(series):
+
+    ser_sort = np.sort(series)
+    while len(ser_sort) > 2:
+        ser_sort = ser_sort[1:len(ser_sort)-1]
+
+    if len(ser_sort) == 1:
+        return ser_sort[0]
+    else:
+        return (ser_sort[0] + ser_sort[1]) / 2
     """
     finds the median of the series from scratch
     you may need to sort your values and use
