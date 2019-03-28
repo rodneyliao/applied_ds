@@ -14,7 +14,7 @@ def average(series):
     See numpy documenation for implementation details:
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.mean.html
     """
-    pass
+    return sum(series)/len(series)
 
 def standard_deviation(series):
     """
@@ -26,7 +26,13 @@ def standard_deviation(series):
     See numpy documenation for implementation details:
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.std.html
     """
-    pass
+#     sqrt((x - x.mean()2/(n-1))
+    mean = average(series)
+    n = len(series)
+    val = 0
+    for num in series:
+        val += (num - mean)**2
+    return math.sqrt(val/(n-1))
 
 def median(series):
     """
@@ -38,4 +44,9 @@ def median(series):
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html
     https://pandas.pydata.org/pandas-docs/version/0.23.0/generated/pandas.Series.median.html
     """
-    pass
+    if len(series) % 2 == 1:
+        return series[(len(series)+1)/2-1]
+    else:
+        lower = series[len(series)/2-1]
+        upper = series[len(series)/2]
+        return (float(lower + upper)) / 2 
