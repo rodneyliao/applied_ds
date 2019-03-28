@@ -28,12 +28,13 @@ def standard_deviation(series):
     See numpy documenation for implementation details:
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.std.html
     """
-    stDev_list  = []
+    diff  = []
     avg = average(series)
     for i in range(len(series)):
-        temp = math.sqrt((series[i] - avg)^2/(len(series) - 1))
-        stDev_list.append(temp) 
-    return(stDev_list)
+        temp = (series.iloc[i] - avg)**2
+        diff.append(temp)
+    stDev = math.sqrt(sum(diff)/(len(series) - 1))
+    return(stDev)
     pass
 
 def median(series):
@@ -46,11 +47,14 @@ def median(series):
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html
     https://pandas.pydata.org/pandas-docs/version/0.23.0/generated/pandas.Series.median.html
     """
-    temp = np.sort(series)
-    length = len(temp)
+    new = np.sort(series)
+    length = len(new)
+    n1 = int(length / 2)
+    n2 = int(length / 2) + 1
     if length % 2 == 0:
-        mid = (temp[length/2] + temp[length/2 + 1])/2
+        mid = (new[n1] + new[n2])/2
     else: 
-        mid = math.ceil(length % 2)
-    return(temp[mid])
+        location = math.floor(length % 2)
+        mid = new[location]
+    return(mid)
     pass
