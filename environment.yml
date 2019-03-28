@@ -1,4 +1,4 @@
-name: em212
+name: em212_myjob
 channels:
   - conda-forge
 dependencies:
@@ -13,6 +13,7 @@ dependencies:
   - scikit-learn
   - jupyterlab
   - jupyter
+  - xlrd
   - ipykernel
   - jupyter_nbextensions_configurator
   - pip:
