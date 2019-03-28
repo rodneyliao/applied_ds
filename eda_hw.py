@@ -44,9 +44,9 @@ def median(series):
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html
     https://pandas.pydata.org/pandas-docs/version/0.23.0/generated/pandas.Series.median.html
     """
-    if len(series) % 2 == 1:
-        return series[(len(series)+1)/2-1]
-    else:
-        lower = series[len(series)/2-1]
-        upper = series[len(series)/2]
-        return (float(lower + upper)) / 2 
+    n = len(series)
+    vals = series.values.tolist()
+    vals.sort()
+    if len(vals) % 2 == 1:
+        return vals[n//2]
+    return float((vals[(n-1)//2] +vals[n//2])/2.0)  
