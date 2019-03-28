@@ -13,6 +13,7 @@ dependencies:
   - scikit-learn
   - jupyterlab
   - jupyter
+  - xlrd
   - ipykernel
   - jupyter_nbextensions_configurator
   - pip:
