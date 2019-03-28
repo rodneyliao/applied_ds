@@ -3,7 +3,10 @@ import numpy as np
 import math
 import pdb
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/master
 def average(series):
     """
     implements the average of a pandas series from scratch
@@ -15,6 +18,7 @@ def average(series):
     See numpy documenation for implementation details:
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.mean.html
     """
+<<<<<<< HEAD
     l = len(series)
     s = sum(series)
         
@@ -22,6 +26,8 @@ def average(series):
     
     return(average)
     
+=======
+>>>>>>> upstream/master
     pass
 
 def standard_deviation(series):
@@ -33,6 +39,7 @@ def standard_deviation(series):
     https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.std.html
     See numpy documenation for implementation details:
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.std.html
+<<<<<<< HEAD
     
     NOTES:
     - Likely requires a for-loop
@@ -68,6 +75,9 @@ def standard_deviation(series):
         
     return(standard_deviation)
     
+=======
+    """
+>>>>>>> upstream/master
     pass
 
 def median(series):
@@ -80,6 +90,7 @@ def median(series):
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html
     https://pandas.pydata.org/pandas-docs/version/0.23.0/generated/pandas.Series.median.html
     """
+<<<<<<< HEAD
     
     data_sort = np.sort(series)
     
@@ -98,4 +109,6 @@ def median(series):
     one datapoint remains (odd number of data) or if
     two do. Then returns if one, returns averages if 2.'''
     
+=======
+>>>>>>> upstream/master
     pass
