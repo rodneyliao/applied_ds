@@ -22,6 +22,7 @@ def average(series):
     l = len(series)
     s = sum(series)
         
+
 	
     average = s/l
     
