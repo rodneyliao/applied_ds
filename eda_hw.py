@@ -26,7 +26,6 @@ def standard_deviation(series):
     See numpy documenation for implementation details:
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.std.html
     """
-
     aver_val = average(series)
     n = len(series)
     square_sum = 0
@@ -35,9 +34,6 @@ def standard_deviation(series):
     return math.sqrt(square_sum/(n-1))
         
     
-=======
-    pass
-
 def median(series):
     """
     finds the median of the series from scratch
@@ -48,7 +44,6 @@ def median(series):
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html
     https://pandas.pydata.org/pandas-docs/version/0.23.0/generated/pandas.Series.median.html
     """
-
     n = len(series)
     median = 0
     val_ls = series.values.tolist()
@@ -58,6 +53,3 @@ def median(series):
     else:
         median = val_sort[(n-1)/2]
     return median
-=======
-    pass
-
