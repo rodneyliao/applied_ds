@@ -20,5 +20,4 @@ def io_hw(out_path):
     df=pd.read_csv(url)
     head_df = df.head()
     head_df.to_csv(out_path,index = False)
-    
     return df, head_df
