@@ -28,5 +28,5 @@ def median(series):
     if count % 2 != 0:
         median = sorted[midpoint]
     else:
-        median = (sorted[midpoint] + sorted[midpoint+1]) / 2
+        median = (sorted[midpoint] + sorted[midpoint-1]) / 2
     return median
