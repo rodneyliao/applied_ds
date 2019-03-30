@@ -3,39 +3,30 @@ import numpy as np
 import math
 import pdb
 
+
 def average(series):
-    """
-    implements the average of a pandas series from scratch
-    suggested functions:
-    len(list)
-    sum(list)
-    you should get the same result as calling .mean() on your series
-    https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.mean.html
-    See numpy documenation for implementation details:
-    https://docs.scipy.org/doc/numpy/reference/generated/numpy.mean.html
-    """
-    pass
+    '''Returns the average of a series'''
+    sum = np.sum(series) # calculate sum of all the elements
+    count = len(series) # count the elements in the series
+    mean = sum / count
+    return mean
+
 
 def standard_deviation(series):
-    """
-    implements the sample standard deviation of a series from scratch
-    you may need a for loop and your average function
-    also the function math.sqrt
-    you should get the same result as calling .std() on your data
-    https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.std.html
-    See numpy documenation for implementation details:
-    https://docs.scipy.org/doc/numpy/reference/generated/numpy.std.html
-    """
-    pass
+    '''Returns the sample standard deviation of a series'''
+    mean = average(series)
+    count = len(series) - 1
+    squared_deviations = np.square(np.subtract(series, mean))
+    sample_sd = np.sqrt(np.sum(squared_deviations) / count)
+    return sample_sd
 
 def median(series):
-    """
-    finds the median of the series from scratch
-    you may need to sort your values and use
-    modular division
-    this number should be the same as calling .median() on your data
-    See numpy documenation for implementation details:
-    https://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html
-    https://pandas.pydata.org/pandas-docs/version/0.23.0/generated/pandas.Series.median.html
-    """
-    pass
+    '''Returns the median of a series'''
+    count = len(series)
+    sorted = np.sort(series)
+    midpoint = math.floor(count / 2)
+    if count % 2 != 0:
+        median = sorted[midpoint]
+    else:
+        median = (sorted[midpoint] + sorted[midpoint+1]) / 2
+    return median
