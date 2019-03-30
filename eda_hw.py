@@ -64,6 +64,6 @@ def median(series):
     if sl % 2 == 1:
             return sorted(series)[sl//2]
     else:
-            return sum(sorted(series)[sl//2-1:sl//2+1])/2.0
+            return (sorted(series)[sl//2]+sorted(series)[sl//2+1])/2
     
     
