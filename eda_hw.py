@@ -14,8 +14,7 @@ def average(series):
     See numpy documenation for implementation details:
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.mean.html
     """
-    average = sum(series)/len(series)
-    return(average)
+    return(sum(series)/len(series))
     pass
 
 def standard_deviation(series):
@@ -29,9 +28,8 @@ def standard_deviation(series):
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.std.html
     """
     diff  = []
-    avg = average(series)
     for i in range(len(series)):
-        temp = (series.iloc[i] - avg)**2
+        temp = (series.iloc[i] - average(series))**2
         diff.append(temp)
     stDev = math.sqrt(sum(diff)/(len(series) - 1))
     return(stDev)
