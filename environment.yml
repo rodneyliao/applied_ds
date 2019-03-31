@@ -1,4 +1,4 @@
-name: em212_myjob
+name: em212
 channels:
   - conda-forge
 dependencies:
