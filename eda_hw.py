@@ -15,7 +15,7 @@ def standard_deviation(series):
     # implements sample standard deviation of a series from scratch
     
     # go through loop to find variance
-    n = len(series)
+    n = len(series) - 1
     sqDiff = 0
     variance = 0
     for idx in series:
@@ -37,7 +37,7 @@ def median(series):
     
     # determines whether even or odd and determines median
     if (n % 2) == 0:
-        return (s[int(n/2)]+ s[int(n/2)+1])/2
+        return (s[int(n/2)]+ s[int(n/2)-1])/2
     else:
         return s[int(m/2)]
     
