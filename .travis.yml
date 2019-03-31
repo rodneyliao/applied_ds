@@ -10,6 +10,6 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  - conda env create -q enviornment.yml
+  - conda env create -q environment.yml
   - source activate em212
 script: pytest
