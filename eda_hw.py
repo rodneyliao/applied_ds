@@ -40,5 +40,13 @@ def median(series):
     See numpy documenation for implementation details:
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html
     https://pandas.pydata.org/pandas-docs/version/0.23.0/generated/pandas.Series.median.html
+    1st try answer: return np.percentile(series, 50)
+    reference: https://stackoverflow.com/questions/24101524/finding-median-of-list-in-python
     """
-    return np.percentile(series, 50)
+    n = len(series)
+    if n < 1:
+            return None
+    if n % 2 == 1:
+            return sorted(series)[n//2]
+    else:
+            return sum(sorted(series)[n//2-1:n//2+1])/2.0 
