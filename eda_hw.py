@@ -54,6 +54,7 @@ def median(series):
     if len(n) < 1:
         return None
     elif len(n)%2 == 1:
-        return n[len(n)//2+1]
+        return n[len(n)//2]
     else:
-        return (n[len(n)//2] + n[len(n)//2+1])/2
+        return (n[len(n)//2-1] + n[len(n)//2])/2
+
