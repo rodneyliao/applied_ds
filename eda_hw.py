@@ -4,6 +4,13 @@ import math
 import pdb
 
 def average(series):
+    return sum(list)/len(list)
+
+list = [1, 19, 20, 18, 3, 6, 8, 10, 2, 5, 7]
+avg = average list
+
+print ("Average of the list =", round(avg,2))
+    
     """
     implements the average of a pandas series from scratch
     suggested functions:
@@ -17,6 +24,7 @@ def average(series):
     pass
 
 def standard_deviation(series):
+    
     """
     implements the sample standard deviation of a series from scratch
     you may need a for loop and your average function
@@ -26,9 +34,9 @@ def standard_deviation(series):
     See numpy documenation for implementation details:
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.std.html
     """
-    pass
+    #pass
 
-def median(series):
+#def median(series):
     """
     finds the median of the series from scratch
     you may need to sort your values and use
@@ -38,4 +46,4 @@ def median(series):
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html
     https://pandas.pydata.org/pandas-docs/version/0.23.0/generated/pandas.Series.median.html
     """
-    pass
+    #pass
