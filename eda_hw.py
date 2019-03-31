@@ -32,7 +32,7 @@ def standard_deviation(series):
     sum1 = 0
     for i in range(0,len(series)):
         sum1 = sum1 + (series[i]-a1)**2
-    b1 = sum1 / len(series)
+    b1 = sum1 / (len(series)-1)
     c1 = math.sqrt(b1)
     """
     print(c1)
