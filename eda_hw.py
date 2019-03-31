@@ -30,7 +30,6 @@ def standard_deviation(series):
     sa = average(series)
     sl=len(series)
     ss=0
-    i=1
     for i in range(0,sl):
         a = series[i]-sa
         b = a ** 2
