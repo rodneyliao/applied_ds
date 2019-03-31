@@ -52,7 +52,7 @@ def median(series):
     if length % 2 == 0:
         mid = (new[n1] + new[n2])/2
     else: 
-        location = math.floor(length % 2)
+        location = (length-1) // 2
         mid = new[location]
     return(mid)
     pass
