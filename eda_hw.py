@@ -33,7 +33,7 @@ def standard_deviation(series):
         diffsq = (series[i] - mean)**2
         sum_diffsq = sum_diffsq + diffsq
     
-    s = sqrt(sum_diffsq/(len(series)-1))
+    s = (sum_diffsq/(len(series)-1))**(1/2)
     
     return s
         
