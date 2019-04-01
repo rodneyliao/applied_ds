@@ -3,18 +3,18 @@ import numpy as np
 import math
 import pdb
 
+   
+dataset = pd.read_csv('https://storage.googleapis.com/project-sunroof/csv/latest/project-sunroof-census_tract.csv')
+df = pd.DataFrame(dataset)
+col = [18]
+df = df[df.columns[col]]
+
 def average(series):
-    """
-    implements the average of a pandas series from scratch
-    suggested functions:
-    len(list)
-    sum(list)
-    you should get the same result as calling .mean() on your series
-    https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.mean.html
-    See numpy documenation for implementation details:
-    https://docs.scipy.org/doc/numpy/reference/generated/numpy.mean.html
-    """
-    pass
+ 
+    length = len(series)
+    total = sum(series)
+    average = total/length
+    return(average)
 
 def standard_deviation(series):
     """
@@ -26,7 +26,15 @@ def standard_deviation(series):
     See numpy documenation for implementation details:
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.std.html
     """
-    pass
+    stDev = []
+    avg = average(series)
+    length = len(series)
+    for i in series:
+        stDev.append((i-avg)**2)
+    ss = sum(stDev)
+    standard_deviation = math.sqrt((ss/(length-1)))
+    return(standard_deviation)
+    
 
 def median(series):
     """
@@ -38,4 +46,17 @@ def median(series):
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html
     https://pandas.pydata.org/pandas-docs/version/0.23.0/generated/pandas.Series.median.html
     """
-    pass
+    sortedData = sorted(series)
+    num = len(series)
+    if (num%2)==0:
+        tempnum = len(series)/2
+        tempnumlow = int(tempnum)
+        tempnumhigh = int(tempnum)-1
+        median = (sortedData[tempnumlow]+sortedData[tempnumhigh])/2
+    else:
+        index = len(series)/2
+        median = sortedData[index]
+    print(median)
+    return(median)
+
+
