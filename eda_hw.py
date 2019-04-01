@@ -65,7 +65,7 @@ def median(series):
    #     median = series[index]
  #return median
     n = len(series)
-    if n < 1
+    if n < 1:
         return None
     if n % 2 == 1:
         return sorted(series)[n//2]
