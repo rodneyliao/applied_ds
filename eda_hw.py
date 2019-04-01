@@ -37,6 +37,7 @@ def standard_deviation(series):
     b = math.sqrt(sum/(len(series)-1))
     return b
 
+
 def median(series):
     """
     finds the median of the series from scratch
@@ -65,3 +66,4 @@ def median(series):
     else:
         c = series[n//2]
         return c
+
