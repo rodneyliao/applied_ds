@@ -48,20 +48,27 @@ def median(series):
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html
     https://pandas.pydata.org/pandas-docs/version/0.23.0/generated/pandas.Series.median.html
     """
-    sorted_series = series.sort_values(ascending=True)
+    #sorted_series = series.sort_values(ascending=True)
     
-    length = len(sorted_series)
+    #length = len(sorted_series)
     
     #if remainder of length/2 = 0  ====> even number of values
-    if (length % 2 == 0):
-        first_index = length / 2
-        second_index = length / 2 - 1
+   # if (length % 2 == 0):
+   #     first_index = length / 2
+   #     second_index = length / 2 - 1
         
-        median = (series[first_index] + series[second_index]) / 2
+   #     median = (series[first_index] + series[second_index]) / 2
         
-    else: #not even ===> must be odd
-        index = (length + 1) / 2
-        median = series[index]
-        
+   # else: #not even ===> must be odd
+   #     index = (length + 1) / 2
+   #     median = series[index]
+ #return median
+    n = len(series)
+    if n < 1
+        return None
+    if n % 2 == 1:
+        return sorted(series)[n//2]
+    else:
+        return sum(sorted(series)[n//2-1:n//2+1])/2
     
-    return median
+    #return median
