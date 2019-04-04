@@ -15,6 +15,8 @@ def average(series):
     https://docs.scipy.org/doc/numpy/reference/generated/numpy.mean.html
     """
     pass
+    avgnum = sum(series) / len(series)
+    return avgnum
 
 def standard_deviation(series):
     """
