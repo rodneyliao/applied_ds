@@ -437,3 +437,13 @@ g = perf_geo.plot(  column="share_periods",
                     legend=True,
                     figsize=(20, 10))
 g.set_title("Share of years of over/underperformance" + "\n" + "in terms of change in median" + "\n" + "ground value, 2010 to 2017")
+
+# %% md
+##### Next steps
+# Now that I have found a way to identify the districts that performed better than
+# their counterparts, my next goal is to find statistical evidence of the factors
+# which enabled their superior performance. One idea would be to work an a logistical
+# regression with an outperformance dummy as the dependent variable and the district
+# features of the previous period as the independent variables. Another idea would be
+# a machine learning model that tries to apply binary classification to the same
+# problem. I will address these ideas in the next project report. 
