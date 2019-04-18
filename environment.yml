@@ -16,5 +16,6 @@ dependencies:
   - xlrd
   - ipykernel
   - jupyter_nbextensions_configurator
+  - wordcloud
   - pip:
     - jupyter-contrib-nbextensions
