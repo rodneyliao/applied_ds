@@ -29,6 +29,5 @@ def median(series):
         median = (sortedSeries[round(lstlen/2)]+sortedSeries[round(lstlen/2+1)])/2
     else:
         median = sortedSeries[(lstlen+1)/2]
-        
     return median 
   
