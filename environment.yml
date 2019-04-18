@@ -14,7 +14,6 @@ dependencies:
   - jupyterlab
   - jupyter
   - xlrd
-  - plotly
   - ipykernel
   - jupyter_nbextensions_configurator
   - wordcloud
