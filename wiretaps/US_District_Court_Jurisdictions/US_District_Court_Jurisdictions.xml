@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8"?><MD_Metadata xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:xalan="http://xml.apache.org/xalan" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.isotc211.org/2005/gmd">
+<fileIdentifier>
+<gco:CharacterString>1505995148162r6552927417438354</gco:CharacterString>
+</fileIdentifier>
+<language>
+<LanguageCode codeList="http://www.loc.gov/standards/iso639-2/php/code_list.php" codeListValue="eng" codeSpace="ISO639-2">eng</LanguageCode>
+</language>
+<characterSet>
+<MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8" codeSpace="ISOTC211/19115">utf8</MD_CharacterSetCode>
+</characterSet>
+<hierarchyLevel>
+<MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset" codeSpace="ISOTC211/19115">dataset</MD_ScopeCode>
+</hierarchyLevel>
+<contact>
+<CI_ResponsibleParty>
+<contactInfo gco:nilReason="missing"/>
+<role>
+<CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact" codeSpace="ISOTC211/19115">pointOfContact</CI_RoleCode>
+</role>
+</CI_ResponsibleParty>
+</contact>
+<dateStamp>
+<gco:Date>2017-09-19</gco:Date>
+</dateStamp>
+<metadataStandardName>
+<gco:CharacterString>NAP - Metadata</gco:CharacterString>
+</metadataStandardName>
+<metadataStandardVersion>
+<gco:CharacterString>1.2</gco:CharacterString>
+</metadataStandardVersion>
+<spatialRepresentationInfo>
+<MD_VectorSpatialRepresentation>
+<topologyLevel>
+<MD_TopologyLevelCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_TopologyLevelCode" codeListValue="geometryOnly" codeSpace="ISOTC211/19115">geometryOnly</MD_TopologyLevelCode>
+</topologyLevel>
+<geometricObjects>
+<MD_GeometricObjects>
+<geometricObjectType>
+<MD_GeometricObjectTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_GeometricObjectTypeCode" codeListValue="composite" codeSpace="ISOTC211/19115">composite</MD_GeometricObjectTypeCode>
+</geometricObjectType>
+<geometricObjectCount>
+<gco:Integer>94</gco:Integer>
+</geometricObjectCount>
+</MD_GeometricObjects>
+</geometricObjects>
+</MD_VectorSpatialRepresentation>
+</spatialRepresentationInfo>
+<referenceSystemInfo>
+<MD_ReferenceSystem>
+<referenceSystemIdentifier>
+<RS_Identifier>
+<code>
+<gco:CharacterString>4326</gco:CharacterString>
+</code>
+<codeSpace>
+<gco:CharacterString>EPSG</gco:CharacterString>
+</codeSpace>
+<version>
+<gco:CharacterString>6.14(3.0.1)</gco:CharacterString>
+</version>
+</RS_Identifier>
+</referenceSystemIdentifier>
+</MD_ReferenceSystem>
+</referenceSystemInfo>
+<identificationInfo>
+<MD_DataIdentification>
+<citation>
+<CI_Citation>
+<title>
+<gco:CharacterString>United States District Court Jurisdictions</gco:CharacterString>
+</title>
+<date gco:nilReason="missing"/>
+<citedResponsibleParty gco:nilReason="missing"/>
+<presentationForm>
+<CI_PresentationFormCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_PresentationFormCode" codeListValue="mapDigital" codeSpace="ISOTC211/19115">mapDigital</CI_PresentationFormCode>
+</presentationForm>
+<collectiveTitle>
+<gco:CharacterString>HIFLD Open and HIFLD Secure</gco:CharacterString>
+</collectiveTitle>
+</CI_Citation>
+</citation>
+<abstract>
+<gco:CharacterString>Created based upon information located on the US Department of Justice Website. 2013 - this data was updated to correct a missing jurisdiction.</gco:CharacterString>
+</abstract>
+<purpose>
+<gco:CharacterString>This data provides the jurisdictions of the United States District Courts.</gco:CharacterString>
+</purpose>
+<status>
+<MD_ProgressCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ProgressCode" codeListValue="completed" codeSpace="ISOTC211/19115">completed</MD_ProgressCode>
+</status>
+<pointOfContact>
+<CI_ResponsibleParty>
+<organisationName>
+<gco:CharacterString>DI/GIU</gco:CharacterString>
+</organisationName>
+<contactInfo gco:nilReason="missing"/>
+<role>
+<CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact" codeSpace="ISOTC211/19115">pointOfContact</CI_RoleCode>
+</role>
+</CI_ResponsibleParty>
+</pointOfContact>
+<resourceMaintenance>
+<MD_MaintenanceInformation>
+<maintenanceAndUpdateFrequency>
+<MD_MaintenanceFrequencyCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="asNeeded" codeSpace="ISOTC211/19115">asNeeded</MD_MaintenanceFrequencyCode>
+</maintenanceAndUpdateFrequency>
+</MD_MaintenanceInformation>
+</resourceMaintenance>
+<descriptiveKeywords>
+<MD_Keywords>
+<keyword>
+<gco:CharacterString>District of Columbia</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Continental United States</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Northern Mariana Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Guam</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Alaska</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Hawaii</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>U.S. Virgin Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Puerto Rico</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>CONUS</gco:CharacterString>
+</keyword>
+<type>
+<MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place" codeSpace="ISOTC211/19115">place</MD_KeywordTypeCode>
+</type>
+</MD_Keywords>
+</descriptiveKeywords>
+<descriptiveKeywords>
+<MD_Keywords>
+<keyword>
+<gco:CharacterString>District of Columbia</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Continental United States</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Northern Mariana Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Guam</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Alaska</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Hawaii</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>U.S. Virgin Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Puerto Rico</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>CONUS</gco:CharacterString>
+</keyword>
+<type>
+<MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place" codeSpace="ISOTC211/19115">place</MD_KeywordTypeCode>
+</type>
+</MD_Keywords>
+</descriptiveKeywords>
+<descriptiveKeywords>
+<MD_Keywords>
+<keyword>
+<gco:CharacterString>District of Columbia</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Continental United States</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Northern Mariana Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Guam</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Alaska</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Hawaii</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>U.S. Virgin Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Puerto Rico</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>CONUS</gco:CharacterString>
+</keyword>
+<type>
+<MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place" codeSpace="ISOTC211/19115">place</MD_KeywordTypeCode>
+</type>
+</MD_Keywords>
+</descriptiveKeywords>
+<descriptiveKeywords>
+<MD_Keywords>
+<keyword>
+<gco:CharacterString>District of Columbia</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Continental United States</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Northern Mariana Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Guam</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Alaska</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Hawaii</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>U.S. Virgin Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Puerto Rico</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>CONUS</gco:CharacterString>
+</keyword>
+<type>
+<MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place" codeSpace="ISOTC211/19115">place</MD_KeywordTypeCode>
+</type>
+</MD_Keywords>
+</descriptiveKeywords>
+<descriptiveKeywords>
+<MD_Keywords>
+<keyword>
+<gco:CharacterString>District of Columbia</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Continental United States</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Northern Mariana Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Guam</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Alaska</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Hawaii</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>U.S. Virgin Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Puerto Rico</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>CONUS</gco:CharacterString>
+</keyword>
+<type>
+<MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place" codeSpace="ISOTC211/19115">place</MD_KeywordTypeCode>
+</type>
+</MD_Keywords>
+</descriptiveKeywords>
+<descriptiveKeywords>
+<MD_Keywords>
+<keyword>
+<gco:CharacterString>District of Columbia</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Continental United States</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Northern Mariana Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Guam</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Alaska</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Hawaii</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>U.S. Virgin Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Puerto Rico</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>CONUS</gco:CharacterString>
+</keyword>
+<type>
+<MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place" codeSpace="ISOTC211/19115">place</MD_KeywordTypeCode>
+</type>
+</MD_Keywords>
+</descriptiveKeywords>
+<descriptiveKeywords>
+<MD_Keywords>
+<keyword>
+<gco:CharacterString>District of Columbia</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Continental United States</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Northern Mariana Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Guam</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Alaska</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Hawaii</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>U.S. Virgin Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Puerto Rico</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>CONUS</gco:CharacterString>
+</keyword>
+<type>
+<MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place" codeSpace="ISOTC211/19115">place</MD_KeywordTypeCode>
+</type>
+</MD_Keywords>
+</descriptiveKeywords>
+<descriptiveKeywords>
+<MD_Keywords>
+<keyword>
+<gco:CharacterString>District of Columbia</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Continental United States</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Northern Mariana Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Guam</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Alaska</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Hawaii</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>U.S. Virgin Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Puerto Rico</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>CONUS</gco:CharacterString>
+</keyword>
+<type>
+<MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place" codeSpace="ISOTC211/19115">place</MD_KeywordTypeCode>
+</type>
+</MD_Keywords>
+</descriptiveKeywords>
+<descriptiveKeywords>
+<MD_Keywords>
+<keyword>
+<gco:CharacterString>District of Columbia</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Continental United States</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Northern Mariana Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Guam</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Alaska</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Hawaii</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>U.S. Virgin Islands</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>Puerto Rico</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>CONUS</gco:CharacterString>
+</keyword>
+<type>
+<MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place" codeSpace="ISOTC211/19115">place</MD_KeywordTypeCode>
+</type>
+</MD_Keywords>
+</descriptiveKeywords>
+<descriptiveKeywords>
+<MD_Keywords>
+<keyword>
+<gco:CharacterString>United States</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>US</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>law enforcement</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>federal district courts</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>jurisdictions</gco:CharacterString>
+</keyword>
+<type>
+<MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" codeSpace="ISOTC211/19115">theme</MD_KeywordTypeCode>
+</type>
+</MD_Keywords>
+</descriptiveKeywords>
+<descriptiveKeywords>
+<MD_Keywords>
+<keyword>
+<gco:CharacterString>United States</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>US</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>law enforcement</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>federal district courts</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>jurisdictions</gco:CharacterString>
+</keyword>
+<type>
+<MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" codeSpace="ISOTC211/19115">theme</MD_KeywordTypeCode>
+</type>
+</MD_Keywords>
+</descriptiveKeywords>
+<descriptiveKeywords>
+<MD_Keywords>
+<keyword>
+<gco:CharacterString>United States</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>US</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>law enforcement</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>federal district courts</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>jurisdictions</gco:CharacterString>
+</keyword>
+<type>
+<MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" codeSpace="ISOTC211/19115">theme</MD_KeywordTypeCode>
+</type>
+</MD_Keywords>
+</descriptiveKeywords>
+<descriptiveKeywords>
+<MD_Keywords>
+<keyword>
+<gco:CharacterString>United States</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>US</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>law enforcement</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>federal district courts</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>jurisdictions</gco:CharacterString>
+</keyword>
+<type>
+<MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" codeSpace="ISOTC211/19115">theme</MD_KeywordTypeCode>
+</type>
+</MD_Keywords>
+</descriptiveKeywords>
+<descriptiveKeywords>
+<MD_Keywords>
+<keyword>
+<gco:CharacterString>United States</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>US</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>law enforcement</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>federal district courts</gco:CharacterString>
+</keyword>
+<keyword>
+<gco:CharacterString>jurisdictions</gco:CharacterString>
+</keyword>
+<type>
+<MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" codeSpace="ISOTC211/19115">theme</MD_KeywordTypeCode>
+</type>
+</MD_Keywords>
+</descriptiveKeywords>
+<descriptiveKeywords>
+<MD_Keywords>
+<keyword>
+<gco:CharacterString>Downloadable Data</gco:CharacterString>
+</keyword>
+<thesaurusName uuidref="723f6998-058e-11dc-8314-0800200c9a66"/>
+</MD_Keywords>
+</descriptiveKeywords>
+<resourceConstraints>
+<MD_Constraints>
+<useLimitation>
+<gco:CharacterString>Access Constraint: None (Public Domain Information)Use Constraint: None (Public Use)</gco:CharacterString>
+</useLimitation>
+</MD_Constraints>
+</resourceConstraints>
+<resourceConstraints>
+<MD_LegalConstraints>
+<useLimitation>
+<gco:CharacterString>Distributor assumes no liability for misuse of data.</gco:CharacterString>
+</useLimitation>
+<otherConstraints>
+<gco:CharacterString>Access Constraint: None (Public Domain Information)</gco:CharacterString>
+</otherConstraints>
+</MD_LegalConstraints>
+</resourceConstraints>
+<aggregationInfo>
+<MD_AggregateInformation>
+<aggregateDataSetName>
+<CI_Citation>
+<title>
+<gco:CharacterString>HIFLD Open and HIFLD Secure</gco:CharacterString>
+</title>
+<date gco:nilReason="missing"/>
+<citedResponsibleParty gco:nilReason="missing"/>
+</CI_Citation>
+</aggregateDataSetName>
+<associationType>
+<DS_AssociationTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#DS_AssociationTypeCode" codeListValue="largerWorkCitation" codeSpace="ISOTC211/19115">largerWorkCitation</DS_AssociationTypeCode>
+</associationType>
+</MD_AggregateInformation>
+</aggregationInfo>
+<spatialRepresentationType>
+<MD_SpatialRepresentationTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_SpatialRepresentationTypeCode" codeListValue="vector" codeSpace="ISOTC211/19115">vector</MD_SpatialRepresentationTypeCode>
+</spatialRepresentationType>
+<language>
+<LanguageCode codeList="http://www.loc.gov/standards/iso639-2/php/code_list.php" codeListValue="eng" codeSpace="ISO639-2">eng</LanguageCode>
+</language>
+<characterSet>
+<MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8" codeSpace="ISOTC211/19115">utf8</MD_CharacterSetCode>
+</characterSet>
+<environmentDescription>
+<gco:CharacterString>Version 6.2 (Build 9200) ; Esri ArcGIS 10.4.1.5686</gco:CharacterString>
+</environmentDescription>
+<extent>
+<EX_Extent>
+<temporalElement>
+<EX_TemporalExtent>
+<extent>
+<gml:TimeInstant gml:id="N65667">
+<gml:timePosition>2010-01-01</gml:timePosition>
+</gml:TimeInstant>
+</extent>
+</EX_TemporalExtent>
+</temporalElement>
+</EX_Extent>
+</extent>
+<extent>
+<EX_Extent>
+<geographicElement>
+<EX_GeographicBoundingBox>
+<extentTypeCode>
+<gco:Boolean>true</gco:Boolean>
+</extentTypeCode>
+<westBoundLongitude>
+<gco:Decimal>-179.133392</gco:Decimal>
+</westBoundLongitude>
+<eastBoundLongitude>
+<gco:Decimal>179.788208</gco:Decimal>
+</eastBoundLongitude>
+<southBoundLatitude>
+<gco:Decimal>-14.599767</gco:Decimal>
+</southBoundLatitude>
+<northBoundLatitude>
+<gco:Decimal>71.398048</gco:Decimal>
+</northBoundLatitude>
+</EX_GeographicBoundingBox>
+</geographicElement>
+</EX_Extent>
+</extent>
+<supplementalInformation>
+<gco:CharacterString>If you are using this dataset as a shapefile, please be aware that it was converted from a Geodatabase.  As a result, this shapefile may have attribution and metadata errors resulting from the conversion process. The following are known issues: null values may have been changed to 0s (zeros) or to blank values, numbers (including latitude and longitude) may have been rounded up or down, there may be issues with Unicode character strings, and time cannot be stored in a date field. Field names may have been truncated to no longer than 10 characters or completely changed, lengthy string attributes may have been truncated to 254 characters, and attribute columns may have been deleted. Shapefiles do not support coded domains and subtypes therefore the original file geodatabase attribution and metadata information for coded domains and subtypes could be incorrect or missing in the shapefile version. Please visit the following ESRI website for more information: http://pro.arcgis.com/en/pro-app/tool-reference/appendices/geoprocessing-considerations-for-Shapefile-output.htm</gco:CharacterString>
+</supplementalInformation>
+</MD_DataIdentification>
+</identificationInfo>
+<distributionInfo>
+<MD_Distribution>
+<distributionFormat>
+<MD_Format>
+<name>
+<gco:CharacterString>File Geodatabase Feature Class</gco:CharacterString>
+</name>
+<version gco:nilReason="missing"/>
+</MD_Format>
+</distributionFormat>
+<distributionFormat>
+<MD_Format>
+<name>
+<gco:CharacterString>Vector Digital Data Set (Point)</gco:CharacterString>
+</name>
+<version gco:nilReason="missing"/>
+</MD_Format>
+</distributionFormat>
+<distributor>
+<MD_Distributor>
+<distributorContact>
+<CI_ResponsibleParty>
+<organisationName>
+<gco:CharacterString>HIFLD Subcommittee</gco:CharacterString>
+</organisationName>
+<contactInfo>
+<CI_Contact>
+<address>
+<CI_Address>
+<electronicMailAddress>
+<gco:CharacterString>hifld@hq.dhs.gov</gco:CharacterString>
+</electronicMailAddress>
+</CI_Address>
+</address>
+</CI_Contact>
+</contactInfo>
+<role>
+<CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="distributor" codeSpace="ISOTC211/19115">distributor</CI_RoleCode>
+</role>
+</CI_ResponsibleParty>
+</distributorContact>
+<distributionOrderProcess>
+<MD_StandardOrderProcess>
+<fees>
+<gco:CharacterString>None. No fees are applicable for obtaining the data set.</gco:CharacterString>
+</fees>
+</MD_StandardOrderProcess>
+</distributionOrderProcess>
+</MD_Distributor>
+</distributor>
+<transferOptions>
+<MD_DigitalTransferOptions/>
+</transferOptions>
+</MD_Distribution>
+</distributionInfo>
+<dataQualityInfo>
+<DQ_DataQuality>
+<scope>
+<DQ_Scope>
+<level>
+<MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset" codeSpace="ISOTC211/19115">dataset</MD_ScopeCode>
+</level>
+</DQ_Scope>
+</scope>
+<report>
+<DQ_AbsoluteExternalPositionalAccuracy>
+<measureDescription>
+<gco:CharacterString>None; dataset contains no vertical data.</gco:CharacterString>
+</measureDescription>
+<result gco:nilReason="missing"/>
+</DQ_AbsoluteExternalPositionalAccuracy>
+</report>
+<lineage>
+<LI_Lineage>
+<processStep>
+<LI_ProcessStep>
+<description>
+<gco:CharacterString>Added Guam and Northern Mariana Islands. Standardized capitalization in the DISTRICT field. Updated entries in the District_No field to reflect current district number status. Updated the District_No field from a 'short' to a 'text' field with 20 characters to put "District of Columbia" in as its own District.</gco:CharacterString>
+</description>
+<processor>
+<CI_ResponsibleParty>
+<organisationName>
+<gco:CharacterString>HIFLD Support Team</gco:CharacterString>
+</organisationName>
+<contactInfo gco:nilReason="missing"/>
+<role>
+<CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="processor" codeSpace="ISOTC211/19115">processor</CI_RoleCode>
+</role>
+</CI_ResponsibleParty>
+</processor>
+</LI_ProcessStep>
+</processStep>
+</LI_Lineage>
+</lineage>
+</DQ_DataQuality>
+</dataQualityInfo>
+</MD_Metadata>
