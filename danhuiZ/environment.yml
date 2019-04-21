@@ -1,4 +1,4 @@
-name: em212
+name: cellmeta
 channels:
   - conda-forge
 dependencies:
