@@ -17,5 +17,7 @@ dependencies:
   - ipykernel
   - jupyter_nbextensions_configurator
   - wordcloud
+  - fuzzywuzzy
+  - python-Levenshtein
   - pip:
     - jupyter-contrib-nbextensions
