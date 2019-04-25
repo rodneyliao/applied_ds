@@ -14,10 +14,15 @@ dependencies:
   - jupyterlab
   - jupyter
   - xlrd
+  - papermill
   - ipykernel
   - jupyter_nbextensions_configurator
   - wordcloud
+<<<<<<< HEAD:danhuiZ/environment.yml
   - fuzzywuzzy
   - python-Levenshtein
+=======
+  - pip
+>>>>>>> upstream/master:environment.yml
   - pip:
     - jupyter-contrib-nbextensions
