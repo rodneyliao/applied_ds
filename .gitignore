@@ -1,4 +1,6 @@
 # other things
+*.swp
+*~HEAD
 .DS_Store
 *.zip
 *.key
