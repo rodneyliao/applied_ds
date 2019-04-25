@@ -14,7 +14,10 @@ dependencies:
   - jupyterlab
   - jupyter
   - xlrd
+  - papermill
   - ipykernel
   - jupyter_nbextensions_configurator
+  - wordcloud
+  - pip
   - pip:
     - jupyter-contrib-nbextensions
