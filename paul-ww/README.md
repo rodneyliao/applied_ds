@@ -10,7 +10,7 @@ additional data sourced from Hamburg's [Open Data Portal](http://suche.transpare
 
 ### Running the code / notebooks
 My code is designed to be run in a specific order. All cleaned datasets will be saved in the data folder, which is already pre-populated. Try following these steps when executing the notebooks if you encounter any problems:
-1.   Run the [Ground Values notebook](notebooks/values.ipynb). Downloading the entire dataset could take a long time, so you might want to leave this notebook running in the background. Alternatively, I have uploaded a [compressed version](data/joined_ground_values.pkl.zip) of the cleaned dataset that can be used.
+1.   Run the [Ground Values notebook](notebooks/values.ipynb). Downloading the entire dataset from the original source can take a long time, I am using a link to a [compressed version of the CSV files](https://tufts.box.com/shared/static/r9v656dng1b0ncl3vhyc9mgph884aqk5.zip) that I uploaded to Box.
 2.   Run the [District Profiles notebook](notebooks/profiles.ipynb).
 3.   Run the [Spatial Visualization notebook](notebooks/spatial.ipynb). This will prepare the shapefiles for use in the last notebook.
 4.   Run the [Data Analysis notebook](notebooks/analysis.ipynb). This notebook will rely on the datasets prepared by all of the notebooks above and thus needs to be run as the last step.
