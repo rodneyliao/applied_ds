@@ -1,4 +1,4 @@
-name: em212
+name: paul-ww
 channels:
   - conda-forge
 dependencies:
