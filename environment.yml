@@ -2,7 +2,7 @@ name: em212
 channels:
   - conda-forge
 dependencies:
-  - python=3.7
+  - python=3.6
   - numpy
   - geopandas
   - matplotlib
@@ -20,6 +20,7 @@ dependencies:
   - jupyter_nbextensions_configurator
   - wordcloud
   - census
+  - us
   - pip
   - pip:
     - jupyter-contrib-nbextensions
