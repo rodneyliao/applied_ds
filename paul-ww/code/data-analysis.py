@@ -10,6 +10,7 @@ import seaborn as sns
 import pickle
 import matplotlib.pyplot as plt
 import statsmodels.formula.api as smf
+from sklearn.cluster import KMeans
 import math
 
 # %% md
@@ -117,7 +118,45 @@ fig.set_xlabel("Feature")
 
 
 # %% md
-##### Correlation with the ground value
+#### Real Estate Price and Estimated Ground Value
+# I have already computed the correlation coefficients, it can be beneficial to also
+# examine the actual joint distribution. Here is an example for the most obvious positive correlation
+# with the ground value, the mean real estate price. I am expecting a positive correlation because
+# the ground value is supposed to estimate the mean sale price of a property. Both distributions
+# are very similar in their long tail of high values / property prices:
+# %%
+fig = sns.jointplot(  x="real_estate_price_mean",
+                y="GV_mean",
+                data=dd.reset_index() )
+fig.set_axis_labels("Mean Real Estate Price", "Mean Ground Value")
+
+# %% md
+# This relationship seems to be stable over time as well:
+# %%
+sns.scatterplot(x="real_estate_price_mean", y="GV_mean", data=dd.reset_index(), hue="year")
+
+
+# %% md
+# Let's take another look, broken down by year. In the years 2007 and 2009, the ground
+# values were not estimated by the city:
+# %%
+g = sns.FacetGrid(dd.reset_index(), col="year")
+g = g.map(plt.scatter, "real_estate_price_mean", "GV_mean", edgecolor="w")
+g.set_xlabels("Mean Real Estate Price")
+g.set_ylabels("Mean Ground Value")
+
+# %% md
+# All in all, there seems to be a consistently strong relationship between the two
+# variables, making the ground value a good predictor of the actual real estate price.
+# It thus fulfills its main objective:
+# %%
+sns.regplot(    x="real_estate_price_mean",
+                y="GV_mean",
+                data=dd)
+
+
+# %% md
+#### Correlations with the ground value
 # Since my main goal is predicting the ground value, I would like to see which district features are correlated with the ground value.
 # To do this, I will calculate both the Pearson and Spearman correlation coefficients pairwise across
 # my dataframe:
@@ -212,46 +251,68 @@ sns.pairplot(   data=dd,
 
 
 # %% md
-##### Real Estate Price and Estimated Ground Value
-# Let's turn back to the variables with a potential influence on the ground value. Although
-# I have already computed the correlation coefficients, it can be beneficial to also
-# examine the actual joint distribution. Here is an example for the most obvious positive correlation
-# with the ground value, the mean real estate price. I am expecting a positive correlation because
-# the ground value is supposed to estimate the mean sale price of a property. Both distributions
-# are very similar in their long tail of high values / property prices:
-# %%
-fig = sns.jointplot(  x="real_estate_price_mean",
-                y="GV_mean",
-                data=dd.reset_index() )
-fig.set_axis_labels("Mean Real Estate Price", "Mean Ground Value")
+#### Linear Regression: Predicting the median ground value
+# Let's turn back to the variables with a potential influence on the ground value.
+# In order to build the best model explaining the median ground value,
+# I will construct a linear regression based on the correlations discussed before.
+# Recursive Feature Elimination can help with selecting the most influential
+# features. I rely on the appropriate scikit-learn libraries to do this.
 
 # %% md
-# This relationship seems to be stable over time as well:
+# First, I have to eliminate rows containing missing values, however. For the logistic
+# regression, I will try to include as many variables as possible while. This
+# is only possible at the cost of dropping instances: The more variables I include,
+# the higher the chance of a missing value in one instance. I will therefore settle
+# for all those features with a share of missing features below 33%:
 # %%
-sns.scatterplot(x="real_estate_price_mean", y="GV_mean", data=dd.reset_index(), hue="year")
+model_data = dd[missing.loc[missing.share_missing < 0.33].feature].dropna()
+model_data.reset_index(inplace=True) # include year as a variable
+model_data.drop(columns="district", inplace=True) # drop non-numerical district name
+
+y = ["GV_median"] # store labels
+X = [col for col in model_data.columns if col not in ["GV_median", "GV_mean", "GV_std"]] # store features
+model_data[X].info()
+
+# %% md
+# This step leaves me with more than 500 instances and 57 variables that could be relevant for predicting the
+# median ground value. To find the most important ones, I will run a RFE with the
+# goal of reducing the number of independent variables in my model to 15:
+# %%
+from sklearn.feature_selection import RFE
+from sklearn import linear_model
+
+linear = linear_model.LinearRegression()
+lin_rfe = RFE(linear, 15) # keep the 15 most important features
+lin_rfe = lin_rfe.fit(model_data[X], model_data[y].values.ravel())
+
+reduced_feats = [model_data[X].columns[i] for i in range(len(X)) if lin_rfe.support_[i]]
+reduced_feats # reduced set of relevant features
+
+# %% md
+# Now it is time to run the actual regression and interpret the results:
+# %%
+smf.ols(    "GV_median ~ " + " + ".join(reduced_feats),
+            data = model_data).fit().summary()
+
+# %% md
+# It looks like the median ground value is statistically significantly ($\alpha=0.01$) associated with
+# *   the number of students not enrolled in high schools with an academic focus (```students-not-gym```),
+#     which seems plausible given that parental income is still a predictor for attendance
+#     of these schools. Cheaper neighbourhoods might not send that many children to these
+#     schools or might not contain such institutions.
+# *   the share of residents aged 64 or above (```o64_rel```). This seems counterintuitive,
+#     I would have expected these areas to be associated with a higher ground value.
+# *   the share of residents that are not German citizens (```for_rel```). This seems plausible, as
+#     many of these tend to be refugees who in many cases are not permitted to work
+#     and thus tend to live in cheaper neighbourhoods
+# *   the number of pharmacies in a district (```pharmacies```). I would have expected
+#     the opposite, as the expensive inner city center tends to house more pharmacies
+#     than the districts on the outskirts. However, some districts in the periphery
+#     are also very expensive, which could support this finding.
 
 
 # %% md
-# Let's take another look, broken down by year. In the years 2007 and 2009, the ground
-# values were not estimated by the city:
-# %%
-g = sns.FacetGrid(dd.reset_index(), col="year")
-g = g.map(plt.scatter, "real_estate_price_mean", "GV_mean", edgecolor="w")
-g.set_xlabels("Mean Real Estate Price")
-g.set_ylabels("Mean Ground Value")
-
-# %% md
-# All in all, there seems to be a consistently strong relationship between the two
-# variables, making the ground value a good predictor of the actual real estate price.
-# It thus fulfills its main objective:
-# %%
-sns.regplot(    x="real_estate_price_mean",
-                y="GV_mean",
-                data=dd)
-
-
-# %% md
-##### Distribution of the ground values: mean and median
+#### Distribution of the ground values: mean and median
 # Since I am trying to predict the ground value (and indirectly also the real estate
 # price) on a district level, it makes sense to analyse this variable's distribution.
 # Let's start with an overview over the ground values across the most recent years:
@@ -310,7 +371,6 @@ g.set_xlabel("Year")
 g.set_ylabel("Median Ground Value")
 g.set_title("Linear Model of Mean Ground Value and Year, robust")
 
-
 # %% md
 # To sum up the current findings: while the majority of the districts of Hamburg
 # generally does not see large increases in the ground value, the outliers seem
@@ -365,6 +425,7 @@ g.set_title("Relative y-o-y change in mean and median ground value")
 
 
 # %% md
+#### Identifying the most performant districts
 # My goal is to find out which district out- or underperfomed their counterparts
 # over the course of my observation period. In order to do this, I have to
 # calculate the difference between the average change in the median ground value
@@ -385,16 +446,21 @@ cm.head()
 
 # %% md
 # These are the district/year combinations with the largest positive difference between
-# the median change in the median ground value. These values signify the cases
-# where a district outperformed the median change in median ground value:
+# the median change in the median ground value and the overall change in median ground
+# value. These values signify the cases where a district outperformed the median change
+# in median ground value:
 # %%
 cm.sort_values(by="diff_from_median", ascending=False)["diff_from_median"].head(15) # greatest outperformers in terms of change in median
 
+# %% md
+# The first three instances seem implausible and are likely due to very small sample
+# sizes and / or large changes in instance count year to year.
 
 # %% md
 # These are the district/year combinations with the largest negative difference between
-# the median change in the median ground value. These values signify the cases
-# where a district underperformed the median change in median ground value:
+# the median change in the median ground value and the overall change in median ground
+# value. These values signify the cases where a district underperformed the median change
+# in median ground value:
 # %%
 cm.sort_values(by="diff_from_median", ascending=True)["diff_from_median"].head(15) # greatest underperformers in terms of change in median
 
@@ -439,11 +505,184 @@ g = perf_geo.plot(  column="share_periods",
 g.set_title("Share of years of over/underperformance" + "\n" + "in terms of change in median" + "\n" + "ground value, 2010 to 2017")
 
 # %% md
-##### Next steps
-# Now that I have found a way to identify the districts that performed better than
-# their counterparts, my next goal is to find statistical evidence of the factors
-# which enabled their superior performance. One idea would be to work an a logistical
-# regression with an outperformance dummy as the dependent variable and the district
-# features of the previous period as the independent variables. Another idea would be
-# a machine learning model that tries to apply binary classification to the same
-# problem. I will address these ideas in the next project report. 
+#### K-Means-Clustering
+# It might be worthwhile to search for clusters among district features. My idea
+# was that be plotting the identified clusters on the map, I could be able to
+# discern spatial patterns of similarities. I therefore made use of scikit-learns
+# ```k-means-clustering``` function.
+# %%
+features = dd[missing.loc[missing.share_missing < 0.15].feature].dropna().reset_index()
+features = features.loc[features.year == 2017].set_index("district")
+kmeans = KMeans(n_clusters=3, random_state=0).fit(features)
+centers = features
+centers["labels"] = kmeans.labels_
+centers
+clusters_geo = geodata.merge(centers, on="district", how="right") # merge shapefiles in
+clusters_geo.plot(column="labels", cmap="tab20")
+
+# %% md
+# Without additional information about my clusters, I am not able to see a clear
+# pattern here. One interesting aspect is the distribution of the brown and the dark
+# blue regions: with a few exceptions, the dark blue regions are in the northern
+# half of the city, while the brown areas are located more in the southern parts.
+# They are actually pretty well divided by the river runnin through the city, which
+# historically separates the populous areas on the northern bank from the industrial
+# areas on the soutern bank. Without more information, this is just guesswork, however.
+
+
+# %% md
+#### Logistic Regression to predict outperformance based on demographic features
+# My goal is to extract those variables that best explain a district's outperformance
+# in comparison to the average change across all districts. To do this, I will
+# run a logistic regression on the dependent variable dummy "outperformance", which
+# will be marked 1 if the district's change in median ground value exceeded
+# the median change in ground value that occured in all districts:
+# %%
+cm["outperformed"] = np.where(cm["diff_from_median"] > 0, 1, 0) # 1 if outperformed, 0 if not outperformed
+
+# %% md
+# Since the ground value estimate is published at the end of a year, it should
+# capture the changes that occured within that year. Since I rely on the difference
+# between the ground value of the last and the current year, I need to shift the
+# dummy information back by one year. A row with the index 2010 now means that
+# the district outperformed other districts in the period of January to December 2010,
+# which is the same timeframe that the demographic features correspond to. Without
+# shifting the dummy, the outperformance would be accredited to the year 2011 instead.
+# %%
+unstacked = cm.unstack("district")
+unstacked.index = unstacked.index - 1
+restacked = unstacked.stack().swaplevel().sort_values(["district", "year"])
+restacked.head()
+
+
+# %% md
+# Let's merge the shifted data into the main dataframe. For my logistic regression,
+# the dependent variable will be ```outperformed```. Since the model only works
+# in the absence of missing data, I will first reduce the main dataframe to those
+# columns which have a share of missing values below 5%, of which I then drop
+# those rows where data is missing:
+# %%
+no_missing = dd[missing.loc[missing.share_missing < 0.05].feature].dropna()
+
+
+# %% md
+# Next, I need to merge my features and labels into one dataset. This leaves me with
+# 608 district/year combinations to work with:
+# %%
+ddc = no_missing.merge(restacked, how="inner", left_index=True, right_index=True) # merge the changes into the main dataframe
+ddc.dropna(inplace=True)
+
+# %% md
+# For the actual regression task, I will rely on the libraries provided by scikit-learn:
+# %%
+from sklearn.feature_selection import RFE
+from sklearn.linear_model import LogisticRegression
+
+y=["outperformed"] # store labels
+X=[col for col in ddc.columns[:-8]]
+
+lr = LogisticRegression()
+rfe = RFE(lr, 15) # keep the 15 most important features
+rfe = rfe.fit(ddc[X], ddc[y].values.ravel())
+reduced_feats = [ddc.columns[i] for i in range(len(ddc.columns[:-8])) if rfe.support_[i]]
+reduced_feats # reduced set of relevant features
+
+# %% md
+# Now that I have identified the 15 most relevant features, tt is time to
+# have a look at the regression results:
+# %%
+import statsmodels.api as sm
+
+ddc_y = ddc[y]
+ddc_X = ddc[reduced_feats]
+
+logit_model=sm.Logit(ddc_y,ddc_X)
+result=logit_model.fit()
+result.summary2()
+
+# %% md
+# It seems like only one feature has a statistically significant impact on the
+# likelihood of outperformance. This variable is the number of homes completed
+# in a certain district in a certain year, which could have the potential to
+# drive down real estate prices in the long run.
+
+# %% md
+# In order to test if my model actually has any predictive power, I will split
+# my data into a training and a test set and check its accuracy across both.
+# A lot of this is again handled by scikit-learn libraries:
+# %%
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
+
+X_train, X_test, y_train, y_test = train_test_split(ddc_X, ddc_y, test_size=0.3, random_state=0)
+logreg = LogisticRegression()
+logreg.fit(X_train, y_train)
+
+y_pred = logreg.predict(X_test)
+print("Accuracy of logistic regression classifier on test set: {:.2f}".format(logreg.score(X_test, y_test)))
+
+# %% md
+# An accuracy of 0.63 is only a little above the 50% random guessing would achieve.
+# Let's have a look at the confusion matrix:
+# %%
+from sklearn.metrics import confusion_matrix
+confusion_matrix = confusion_matrix(y_test, y_pred)
+confusion_matrix
+
+# %% md
+# It looks like there were 82 true positives and 33 false negatives and thus 115
+# correct predictions as well as 21 + 47 false predictions. Let's also have a look
+# at the classification report:
+# %%
+from sklearn.metrics import classification_report
+print(classification_report(y_test, y_pred))
+
+# %% md
+# Again, the accuracy is not much better than with random guessing. This is also
+# clear when considering the ROC curve:
+# %%
+from sklearn.metrics import roc_auc_score
+from sklearn.metrics import roc_curve
+logit_roc_auc = roc_auc_score(y_test, logreg.predict(X_test))
+fpr, tpr, thresholds = roc_curve(y_test, logreg.predict_proba(X_test)[:,1])
+plt.figure()
+plt.plot(fpr, tpr, label="Logistic Regression (area = %0.2f)" % logit_roc_auc)
+plt.plot([0, 1], [0, 1],"r--")
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.title("ROC Curve")
+plt.legend(loc="lower right")
+plt.show()
+
+# %% md
+# All in all, I can conclude that my model is not sufficient to predict whether
+# a certain district will outperform the city-wide average change in median ground
+# value based solely on the limited number of demographic features available to me.
+# Features such as centrality, quality of life in terms of amenities such as public
+# transport, number of parks and green spaces or shopping opportunities are not
+# represented in my data. Another important aspect might be instances of autocorrelation,
+# for example if a district with a history of outperformance might be likelier
+# to outperform in the current period as well.
+# All of these aspects could be analyzed as more data is added to the open data
+# portal, leaving a lot of room for interesting research opportunities.
+
+# %% md
+#### Conclusion
+# Across my four notebooks, I have imported, cleaned, analyzed and visualized
+# demographic and real estate data. I was able to find
+# 1.   that the ground values published by the city are quite good estimates
+#      of the actual prices paid in real estate transactions
+# 2.   that the general trend in ground value is much flatter than it seems
+#      at first glance, while the perceived increase is mostly driven by
+#      outliers
+# 3.   a few demographic features which were associated with the median ground value
+#      in a statistically significant way
+# 4.   that without deep insights into the subject, it can be very difficult to
+#      properly interpret clustering results
+# 5.   that given all the features provided by the district profiles dataset,
+#      an accurate prediction of outperformance was still not achievable.
+#
+# Nevertheless, I really enjoyed working on this project and think that I was
+# able to learn quite a lot in the process.
