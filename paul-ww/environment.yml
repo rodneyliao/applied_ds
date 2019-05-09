@@ -18,9 +18,6 @@ dependencies:
   - papermill
   - ipykernel
   - jupyter_nbextensions_configurator
-  - wordcloud
-  - census
-  - us
   - pip
   - math
   - pickle
