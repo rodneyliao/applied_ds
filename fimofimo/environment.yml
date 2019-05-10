@@ -1,0 +1,26 @@
+name: em212
+channels:
+  - conda-forge
+dependencies:
+  - python=3.6
+  - numpy
+  - geopandas
+  - matplotlib
+  - pandas
+  - seaborn
+  - rise
+  - pytest=4.0.0
+  - statsmodels
+  - scikit-learn
+  - jupyterlab
+  - jupyter
+  - xlrd
+  - papermill
+  - ipykernel
+  - jupyter_nbextensions_configurator
+  - wordcloud
+  - census
+  - us
+  - pip
+  - pip:
+    - jupyter-contrib-nbextensions
