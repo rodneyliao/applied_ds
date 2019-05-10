@@ -1,0 +1,23 @@
+name: cellmeta
+channels:
+  - conda-forge
+dependencies:
+  - python=3.7
+  - numpy
+  - matplotlib
+  - pandas
+  - seaborn
+  - rise
+  - pytest=4.0.0
+  - statsmodels
+  - scikit-learn
+  - jupyterlab
+  - jupyter
+  - xlrd
+  - ipykernel
+  - jupyter_nbextensions_configurator
+  - wordcloud
+  - fuzzywuzzy
+  - python-Levenshtein
+  - pip:
+    - jupyter-contrib-nbextensions
