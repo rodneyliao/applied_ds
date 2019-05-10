@@ -1,30 +1,63 @@
 # -*- coding: utf-8 -*-
 """
-The data from the original kickstarter dataset is from four different scrape dates
+Spyder Editor
 
-Between scrape dates, webrobots.io must have changed the script they used to pull the data
-
-The column labels are different across files, so we need to normalize them
-
-This script drop labels that aren't included in the original 2016 version of the dataset
+This is a temporary script file.
 """
 
 import pandas as pd
+import os
+import zipfile
+import requests
+import io
 import re
 import json
 import math  as mt
-import os
 
-if not os.path.exists('2019Merged_test.csv'):
-    print('reading files from box')
-    nineteenData = pd.read_csv('https://tufts.box.com/shared/static/zc0tobgsu34jqu4msxxnpdqrl5rpfzue.csv')
-    print('Writing file locally for later use')
-    nineteenData.to_csv('2019Merged_test.csv', sep = ',')
-    
+url = 'https://s3.amazonaws.com/weruns/forfun/Kickstarter/Kickstarter_2019-02-14T03_20_04_734Z.zip'
+f = 'Kickstarter_2019-02-14T03_20_04_734Z.zip'
+loc = os.getcwd()
+cmay_dump = os.path.join(loc, r'kick_web_data')
+
+if not os.path.exists(cmay_dump):
+    print('Creating new folder for zip file')
+    os.makedirs(cmay_dump)
 else:
-    print('reading files from directory')
-    nineteenData = pd.read_csv('2019Merged_test.csv')
+    pass
 
+print('requesting Kickstarter data')
+r = requests.get(url)
+if r.ok == True:
+    print('Request returned ok')
+else:
+    print('Download request failed')
+
+z = zipfile.ZipFile(io.BytesIO(r.content))
+print('extracting zipped data' )
+z.extractall(cmay_dump)
+
+os.chdir(cmay_dump)
+print('Merging files in a single .csv')
+mergedData = pd.DataFrame() #Initialize an empty Pandas datafrme
+for filename in os.listdir(): #Make an iterator for all files in this directory
+    try: 
+        tempDF = pd.read_csv(filename)
+        mergedData = mergedData.append(tempDF, ignore_index = False)
+        print(filename, len(mergedData))
+    except: 
+        print('non-CSV')
+        
+mergedData.reset_index()
+
+try: #If there's unnamed columns leftover from old indices, drop them
+    mergedData.drop('Unnamed: 0', axis = 1, inplace = True)
+except: #If there's not, then leave it alone and print a message
+    print('No old indices to drop')     
+
+try: # If there's an old named index column, drop that
+    mergedData.drop('index', axis = 1, inplace = True)
+except: #If not, then leave it alone and print a message
+    print('No index to drop')
 
 #Make a list with all of the columns names we want to drop from the dataframes
 dropColumns = ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'currency_symbol', 'friends', 'is_backing', 'is_starred', \
@@ -43,9 +76,6 @@ def columnDrop(file, labels):
         except: 
             print('label not in axis')
 
-#Now run the columnDrop function on each of the files
-columnDrop(nineteenData, dropColumns)
-
 def catJson(target):
     '''
     This function is used to pull the correct JSON object out of the category row of the
@@ -62,7 +92,6 @@ def fcJson(target):
     y = re.split('/', target['slug'])
     return(y[0])
     
-#Need to review the location splits for international spots to be sure the list location makes sense
 def cityJson(target):
     return(target['short_name'])
 
@@ -72,7 +101,6 @@ def ctryJson(target):
 def creatorJson(target):
     return(target['id'])
     
-#This function separates the strings by :, ',', and "" characters. The function returns URL for rewards categories
 def nameSplit(target):
     '''This function pulls out the url for project rewards from the url column which lists various
     urls associated with the project
@@ -81,7 +109,6 @@ def nameSplit(target):
     result = x[2]
     return(result)
 
-#This function separates the strings by :, ',', and "" characters. The function returns URL for rewards categories
 def rewardsSplit(target):
     '''This function pulls out the url for project rewards from the url column which lists various
     urls associated with the project
@@ -98,9 +125,12 @@ def creDelta(target, origin):
     delta = target - origin
     return(delta) 
     
+#Run the columnDrop function on each of the files
+columnDrop(mergedData, dropColumns)
+    
 print('Dropping rows with empty spaces')
 try:
-    nineteenData.dropna(axis = 0, how='any', thresh = None, subset = None, inplace = True)
+    mergedData.dropna(axis = 0, how='any', thresh = None, subset = None, inplace = True)
 except:
     pass
 print('Empty rows dropped')
@@ -111,42 +141,42 @@ so dropping is the best option
 '''
 print('Dropping Redundant Indices')
 try:
-    nineteenData.drop(labels = 'Unnamed: 0', axis = 1, inplace = True)
+    mergedData.drop(labels = 'Unnamed: 0', axis = 1, inplace = True)
 except:
     pass
 print('Redundant Indices dropped')
 
 print('Category Function Start')
-nineteenData['category'] = nineteenData['category'].apply(json.loads)
+mergedData['category'] = mergedData['category'].apply(json.loads)
 
 print('Name Function Start')
-nineteenData['creator'] = nineteenData['creator'].apply(nameSplit)
+mergedData['creator'] = mergedData['creator'].apply(nameSplit)
  
 print('Location Function Start')
-nineteenData['location'] = nineteenData['location'].apply(json.loads)
+mergedData['location'] = mergedData['location'].apply(json.loads)
 
 print('Rewards Function Start')
-nineteenData['urls'] = nineteenData['urls'].apply(rewardsSplit)
+mergedData['urls'] = mergedData['urls'].apply(rewardsSplit)
 
 print('resetting index')
-nineteenData.reset_index(inplace = True) #reset the index because we dropped some rows
+mergedData.reset_index(inplace = True) #reset the index because we dropped some rows
 try:
-    nineteenData.drop(labels = 'index', axis = 1, inplace = True)
+    mergedData.drop(labels = 'index', axis = 1, inplace = True)
 except:
     pass
 print('index reset')
 
 print('loading subcategories')
-nineteenData['subcats'] = nineteenData['category'].apply(catJson)
+mergedData['subcats'] = mergedData['category'].apply(catJson)
 print('loading categories')
-nineteenData['fullcats'] = nineteenData['category'].apply(fcJson)
+mergedData['fullcats'] = mergedData['category'].apply(fcJson)
 print('loading cities')
-nineteenData['city'] = nineteenData['location'].apply(cityJson)
+mergedData['city'] = mergedData['location'].apply(cityJson)
 print('loading countries')
-nineteenData['country'] = nineteenData['location'].apply(ctryJson)
+mergedData['country'] = mergedData['location'].apply(ctryJson)
 
 print('dropping unused columns')
-nineteenData.drop(labels = ['location','category', 'source_url', 'currency_trailing_code', \
+mergedData.drop(labels = ['location','category', 'source_url', 'currency_trailing_code', \
                  'static_usd_rate', 'profile'], axis = 1, inplace = True)
 
 '''
@@ -156,19 +186,19 @@ The following functions calculate the amount of time that's passed between a few
 - The amount of time passed between launching the project and the project changing states
 '''
 print('Calculating Launch Deltas')
-nineteenData['creLauDelta'] = nineteenData.apply(lambda x: mt.floor((x['launched_at']-x['created_at'])/60/60/24), axis = 1)
+mergedData['creLauDelta'] = mergedData.apply(lambda x: mt.floor((x['launched_at']-x['created_at'])/60/60/24), axis = 1)
 
 print('Calculating Deadline Deltas')
-nineteenData['lauDeadDelta'] = nineteenData.apply(lambda x: mt.floor((x['deadline']-x['launched_at'])/60/60/24), axis = 1)
+mergedData['lauDeadDelta'] = mergedData.apply(lambda x: mt.floor((x['deadline']-x['launched_at'])/60/60/24), axis = 1)
 
 print('Calculating State Change Deltas')
-nineteenData['staLauDelta'] = nineteenData.apply(lambda x: mt.floor((x['state_changed_at']-x['launched_at'])/60/60/24), axis = 1)
+mergedData['staLauDelta'] = mergedData.apply(lambda x: mt.floor((x['state_changed_at']-x['launched_at'])/60/60/24), axis = 1)
 
 print('Tagging projects that originated from Kickstarter.com')
-nineteenData['source'] = 'Kickstarter'
+mergedData['source'] = 'Kickstarter'
 
 print('Calculating % of funding goal reached')
-nineteenData['funds_raised_percent'] = nineteenData.apply(lambda x: x['usd_pledged'] / x['goal'] * 100, axis = 1)
+mergedData['funds_raised_percent'] = mergedData.apply(lambda x: x['usd_pledged'] / x['goal'] * 100, axis = 1)
 
 print('exporting to .csv file')
-nineteenData.to_csv('2019KickDataCleaned.csv', sep = ',')
+mergedData.to_csv('2019KickDataCleaned.csv', sep = ',')   
