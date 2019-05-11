@@ -12,6 +12,7 @@ dependencies:
   - pytest=4.0.0
   - statsmodels
   - scikit-learn
+  - census
   - jupyterlab
   - jupyter
   - xlrd
@@ -20,7 +21,9 @@ dependencies:
   - jupyter_nbextensions_configurator
   - wordcloud
   - census
+  - missingno
   - us
   - pip
+  - pysal
   - pip:
     - jupyter-contrib-nbextensions
