@@ -21,6 +21,7 @@ dependencies:
   - jupyter_nbextensions_configurator
   - wordcloud
   - census
+  - missingno
   - us
   - pip
   - pip:
