@@ -12,4 +12,4 @@ install:
   - conda info -a
   - conda env create -q environment.yml
   - source activate em212
-script: pytest
+script: travis_wait 30 pytest
