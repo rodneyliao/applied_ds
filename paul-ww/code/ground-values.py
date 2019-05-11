@@ -39,50 +39,83 @@ import numpy as np
 import datetime
 import sys
 import re
+from zipfile import ZipFile
+from io import BytesIO, StringIO
 
 # %% md
-# Only execute the next cell if you would like to download the whole dataset.
-# The cell will take a long time to complete, as the server does not seem to offer
-# fast download speeds.
+#### Downloading the data
+# The next cell will download the compressed CSV files from Box. This should be much faster
+# than getting them from the original source. If you prefer downloading them
+# from the Open Data Portal directly, skip this cell and use the commented out
+# code in the cells below. Otherwise, use this cell and proceed normally.
 # %%
-with open("urls.txt") as file:
-    urls = [line.rstrip('\n') for line in file]
 
-def download(urls):
-    '''Downloads the files specified in list urls'''
-    for url in urls:
-        successful = 0
-        count = len(urls)
-        filename = url.rsplit('/', 1)[1]
-        print("Downloading " + filename + " (" + str(successful) + "/" + str(count) + " completed)...")
-        r = requests.get(url, allow_redirects=True)
-        open(filename, 'wb').write(r.content)
-        print("Done.")
-        current += 1
+url = "https://tufts.box.com/shared/static/r9v656dng1b0ncl3vhyc9mgph884aqk5.zip"
 
-download(urls) # start the download
+print("Downloading zip file...")
+r = requests.get(url, allow_redirects=True)
+zip = ZipFile(BytesIO(r.content))
+files = zip.namelist()
+print("Done.")
 
+# filter out residual mac files (DS store and such)
+csvs = [file for file in files if (not "__" in file) and ("br" in file)]
+csvs.sort()
 
-# %% md
-# Assuming that the downloaded CSV files are now present in the working directory,
-# I will import them into pandas DataFrames and join these into a larger one:
-# %%
-files = glob.glob("*.csv") # aggregate all csv files for reading
-files = sorted(files) # sort files to start with the smallest one
-files
-
-# import the data from the CSV files
 dfs = []
-for file in files:
+for file in csvs:
     print("Reading file " + file + "...")
-    dfs.append(pd.read_csv( file,
-                            sep="|",
-                            header=0,
-                            encoding="ISO-8859-1" # this encoding seems to be correct
-                            ))
+    with zip.open(file) as csvfile:
+        dfs.append(pd.read_csv( csvfile,
+                                sep="|",
+                                header=0,
+                                encoding="ISO-8859-1" # this encoding seems to be correct
+                                ))
 print("Concatening dataframes...")
 data = pd.concat(dfs, axis=0, ignore_index=True)
 print("Done.")
+
+# %% md
+#### Download from original source
+# Only execute the next cell if you would like to download the whole dataset.
+# The cell will take a long time to complete, as the server does not seem to offer
+# fast download speeds. I have therefore commented out this section so that it
+# does not run automatically.
+# %%
+# with open("urls.txt") as file:
+#     urls = [line.rstrip('\n') for line in file]
+#
+# def download(urls):
+#     '''Downloads the files specified in list urls'''
+#     for url in urls:
+#         successful = 0
+#         count = len(urls)
+#         filename = url.rsplit('/', 1)[1]
+#         print("Downloading " + filename + " (" + str(successful) + "/" + str(count) + " completed)...")
+#         r = requests.get(url, allow_redirects=True)
+#         open(filename, 'wb').write(r.content)
+#         print("Done.")
+#         current += 1
+#
+# download(urls) # start the download
+#
+# # read downloaded CSV files
+# files = glob.glob("*.csv") # aggregate all csv files for reading
+# files = sorted(files) # sort files to start with the smallest one
+# files
+#
+# # import the data from the CSV files
+# dfs = []
+# for file in files:
+#     print("Reading file " + file + "...")
+#     dfs.append(pd.read_csv( file,
+#                             sep="|",
+#                             header=0,
+#                             encoding="ISO-8859-1" # this encoding seems to be correct
+#                             ))
+# print("Concatening dataframes...")
+# data = pd.concat(dfs, axis=0, ignore_index=True)
+# print("Done.")
 
 
 # %% md

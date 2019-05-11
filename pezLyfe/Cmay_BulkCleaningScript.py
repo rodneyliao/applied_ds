@@ -1,80 +1,114 @@
 # -*- coding: utf-8 -*-
 """
-The data from the original kickstarter dataset is from four different scrape dates
+Spyder Editor
 
-Between scrape dates, webrobots.io must have changed the script they used to pull the data
-
-The column labels are different across files, so we need to normalize them
-
-This script drop labels that aren't included in the original 2016 version of the dataset
+This is a temporary script file.
 """
 
 import pandas as pd
 import os
+import zipfile
+import requests
+import io
 import re
 import json
+import math  as mt
 
-sixteenData = pd.read_csv('2016Short.csv')
-seventeenData = pd.read_csv('2017Short.csv')
-eighteenData = pd.read_csv('2018Short.csv')
-nineteenData = pd.read_csv('2019Short.csv')
+url = 'https://s3.amazonaws.com/weruns/forfun/Kickstarter/Kickstarter_2019-02-14T03_20_04_734Z.zip'
+f = 'Kickstarter_2019-02-14T03_20_04_734Z.zip'
+loc = os.getcwd()
+cmay_dump = os.path.join(loc, r'kick_web_data')
 
-#Since some subcategories and parent categories use more than one word, I'm going to have
-# to fix this. Use one functions to pull the slug out of the shit, and then split on the slah
-# if that's possible
-def catStrip(target): 
-    '''
-    This function strips out the parent category and subcategory of the project
-    The regex.split method with r'\W+' splits the input string at all non-alphanumeric characters
-    The list locations where the parent/subcategory are change between scrape dates
-    So the correct positions have to be chosen for each
-    '''
-    x = re.split(': | , |"', target)
-    return(x[23]) #This is for the 2016 version of the dataset only
-    
-#def subcatStrip(target): 
-    '''
-    This function strips out the parent category and subcategory of the project
-    The regex.split method with r'\W+' splits the input string at all non-alphanumeric characters
-    The list locations where the parent/subcategory are change between scrape dates
-    So the correct positions have to be chosen for each
-    '''
-#    x = re.split(r'\W+', target) 
-#    return(x[11])
-    
+if not os.path.exists(cmay_dump):
+    print('Creating new folder for zip file')
+    os.makedirs(cmay_dump)
+else:
+    pass
 
-def nameStrip(target):
+print('requesting Kickstarter data')
+r = requests.get(url)
+if r.ok == True:
+    print('Request returned ok')
+else:
+    print('Download request failed')
+
+z = zipfile.ZipFile(io.BytesIO(r.content))
+print('extracting zipped data' )
+z.extractall(cmay_dump)
+
+os.chdir(cmay_dump)
+print('Merging files in a single .csv')
+mergedData = pd.DataFrame() #Initialize an empty Pandas datafrme
+for filename in os.listdir(): #Make an iterator for all files in this directory
+    try: 
+        tempDF = pd.read_csv(filename)
+        mergedData = mergedData.append(tempDF, ignore_index = False)
+        print(filename, len(mergedData))
+    except: 
+        print('non-CSV')
+        
+mergedData.reset_index()
+
+try: #If there's unnamed columns leftover from old indices, drop them
+    mergedData.drop('Unnamed: 0', axis = 1, inplace = True)
+except: #If there's not, then leave it alone and print a message
+    print('No old indices to drop')     
+
+try: # If there's an old named index column, drop that
+    mergedData.drop('index', axis = 1, inplace = True)
+except: #If not, then leave it alone and print a message
+    print('No index to drop')
+
+#Make a list with all of the columns names we want to drop from the dataframes
+dropColumns = ['Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'currency_symbol', 'friends', 'is_backing', 'is_starred', \
+               'permissions', 'photo', 'pledged', 'disable_communication', 'is_starrable', 'permissions', \
+               'is_starable', 'current_currency', 'converted_pledged_amount', \
+               'usd_type']
+
+def columnDrop(file, labels):
+    '''This function cycles through the column names in the dropColumns list. For each item in the 
+    dropColumns list, the script tries to drop the column. If the column doesn't exist, it prints
+    a quick alert message
     '''
-    This functions strips out the creator id from the creator column of the dataset
-    Since we're only interested in tying the creator back to the creator profile, we're only
-    extracting the creator ID in this function
-    This also allows us to leave out potential personal identifying information
+    for label in labels:
+        try:
+            file.drop(labels = label, axis = 1, inplace = True)
+        except: 
+            print('label not in axis')
+
+def catJson(target):
     '''
-    x = re.split(r'\W+', target)
-    results = x[26]
-    return(results)
+    This function is used to pull the correct JSON object out of the category row of the
+    temporary dataframe used
+    '''
+    return(target['name'])
+
+def fcJson(target):
+    '''
+    This function is used to pull the parent category from the JSON object. Start by calling the
+    full category label from the JSON object, then split it at the forward slash and extract the
+    first item in the resulting list
+    '''
+    y = re.split('/', target['slug'])
+    return(y[0])
     
-def nameStrip2018(target):
+def cityJson(target):
+    return(target['short_name'])
+
+def ctryJson(target):
+    return(target['country'])
+    
+def creatorJson(target):
+    return(target['id'])
+    
+def nameSplit(target):
+    '''This function pulls out the url for project rewards from the url column which lists various
+    urls associated with the project
     '''
-    This functions strips out the creator id from the creator column of the dataset
-    Since we're only interested in tying the creator back to the creator profile, we're only
-    extracting the creator ID in this function
-    This also allows us to leave out potential personal identifying information
-    '''
-    x = re.split(r'\W+', target)
-    results = x[29]
-    return(results)
-   
-#Need to review the location splits for international spots to be sure the list location makes sense
-def locSplit(target):
-    '''
-    This function does the same thing as the previous two, except for locations
-    '''
-    x = re.split(': | , |"', target)
-    result = x[29]
+    x = re.split('\W+', target)
+    result = x[2]
     return(result)
 
-#This function separates the strings by :, ',', and "" characters. The function returns URL for rewards categories
 def rewardsSplit(target):
     '''This function pulls out the url for project rewards from the url column which lists various
     urls associated with the project
@@ -82,44 +116,89 @@ def rewardsSplit(target):
     x = re.split(': | , |"', target)
     result = x[9]
     return(result)
-
+    
+def creDelta(target, origin):
+    '''
+    This function calculates the difference in time between one column and the 
+    created date of a kickstarter project
+    '''
+    delta = target - origin
+    return(delta) 
+    
+#Run the columnDrop function on each of the files
+columnDrop(mergedData, dropColumns)
+    
 print('Dropping rows with empty spaces')
-sixteenData.dropna(axis = 0, how='any', thresh = None, subset = None, inplace = True)
-seventeenData.dropna(axis = 0, how='any', thresh = None, subset = None, inplace = True)
-eighteenData.dropna(axis = 0, how='any', thresh = None, subset = None, inplace = True)
+try:
+    mergedData.dropna(axis = 0, how='any', thresh = None, subset = None, inplace = True)
+except:
+    pass
 print('Empty rows dropped')
 '''
 Since the entries are scraped from the kickstarter website, some creators didn't add locations
-to their projects. The number of these projects is small, so it shouldn't affect the dataset
-too much
+to their projects. We can't impute the location, and the number of these projects is small,
+so dropping is the best option
 '''
-    
-print('Category Function Start')
-sixteenData['category'] = sixteenData['category'].apply(json.loads)
-seventeenData['category'] = seventeenData['category'].apply(json.loads)
-eighteenData['category'] = eighteenData['category'].apply(json.loads)
-nineteenData['category'] = nineteenData['category'].apply(json.loads)
-print('Cateogry Function Complete')
+print('Dropping Redundant Indices')
+try:
+    mergedData.drop(labels = 'Unnamed: 0', axis = 1, inplace = True)
+except:
+    pass
+print('Redundant Indices dropped')
 
-#I got an error when using the name function and json.loads, so it's back to the old style
+print('Category Function Start')
+mergedData['category'] = mergedData['category'].apply(json.loads)
+
 print('Name Function Start')
-sixteenData['creator'] = sixteenData['creator'].apply(nameStrip)
-seventeenData['creator'] = seventeenData['creator'].apply(nameStrip)
-eighteenData['creator'] = eighteenData['creator'].apply(nameStrip)
-nineteenData['creator'] = nineteenData['creator'].apply(nameStrip)
-print('Name Function Complete')
+mergedData['creator'] = mergedData['creator'].apply(nameSplit)
  
 print('Location Function Start')
-sixteenData['location'] = sixteenData['location'].apply(locSplit)
-seventeenData['location'] = seventeenData['location'].apply(locSplit)
-eighteenData['location'] = eighteenData['location'].apply(locSplit)
-nineteenData['location'] = nineteenData['location'].apply(locSplit)
-print('Location Function Complete')
+mergedData['location'] = mergedData['location'].apply(json.loads)
 
 print('Rewards Function Start')
-sixteenData['urls'] = sixteenData['urls'].apply(rewardsSplit)
-seventeenData['urls'] = seventeenData['urls'].apply(rewardsSplit)
-eighteenData['urls'] = eighteenData['urls'].apply(rewardsSplit)
-nineteenData['urls'] = nineteenData['urls'].apply(rewardsSplit)
-print('Rewards Function Completed')
-   
+mergedData['urls'] = mergedData['urls'].apply(rewardsSplit)
+
+print('resetting index')
+mergedData.reset_index(inplace = True) #reset the index because we dropped some rows
+try:
+    mergedData.drop(labels = 'index', axis = 1, inplace = True)
+except:
+    pass
+print('index reset')
+
+print('loading subcategories')
+mergedData['subcats'] = mergedData['category'].apply(catJson)
+print('loading categories')
+mergedData['fullcats'] = mergedData['category'].apply(fcJson)
+print('loading cities')
+mergedData['city'] = mergedData['location'].apply(cityJson)
+print('loading countries')
+mergedData['country'] = mergedData['location'].apply(ctryJson)
+
+print('dropping unused columns')
+mergedData.drop(labels = ['location','category', 'source_url', 'currency_trailing_code', \
+                 'static_usd_rate', 'profile'], axis = 1, inplace = True)
+
+'''
+The following functions calculate the amount of time that's passed between a few different analysis points
+- The amount of time passed between creating the project and launching the project
+- The amount of time passed between launching the project and the project deadline
+- The amount of time passed between launching the project and the project changing states
+'''
+print('Calculating Launch Deltas')
+mergedData['creLauDelta'] = mergedData.apply(lambda x: mt.floor((x['launched_at']-x['created_at'])/60/60/24), axis = 1)
+
+print('Calculating Deadline Deltas')
+mergedData['lauDeadDelta'] = mergedData.apply(lambda x: mt.floor((x['deadline']-x['launched_at'])/60/60/24), axis = 1)
+
+print('Calculating State Change Deltas')
+mergedData['staLauDelta'] = mergedData.apply(lambda x: mt.floor((x['state_changed_at']-x['launched_at'])/60/60/24), axis = 1)
+
+print('Tagging projects that originated from Kickstarter.com')
+mergedData['source'] = 'Kickstarter'
+
+print('Calculating % of funding goal reached')
+mergedData['funds_raised_percent'] = mergedData.apply(lambda x: x['usd_pledged'] / x['goal'] * 100, axis = 1)
+
+print('exporting to .csv file')
+mergedData.to_csv('2019KickDataCleaned.csv', sep = ',')   
